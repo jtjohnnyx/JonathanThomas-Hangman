@@ -111,7 +111,7 @@
 
         <!-- Row 1 (7 buttons) -->
         <Button
-            android:id="@+id/buttonQ"
+            android:id="@+id/buttonqq"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Q"

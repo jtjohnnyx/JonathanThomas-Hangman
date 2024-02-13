@@ -4,10 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import com.example.jonathanthomashangman2.databinding.ActivityMainBinding
 import java.util.LinkedList
 import kotlin.random.Random
@@ -84,7 +83,7 @@ class MainActivity : AppCompatActivity() {
             if (!found)
                 binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
 
-            binding.buttonA!!.backgroundTintList = ContextCompat.getColorStateList(this, android.R.color.darker_gray)
+            binding.buttonA!!.setImageResource(R.drawable.button_a_disabled_blue)
             binding.buttonA!!.isEnabled = false
             isDone(rem, wordBank[currentIndex].hang)
 
@@ -102,7 +101,7 @@ class MainActivity : AppCompatActivity() {
             if (!found)
                 binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
 
-            binding.buttonB!!.backgroundTintList = ContextCompat.getColorStateList(this, android.R.color.darker_gray)
+            binding.buttonB!!.setImageResource(R.drawable.button_b_disabled_blue)
             binding.buttonB!!.isEnabled = false
             isDone(rem, wordBank[currentIndex].hang)
 
@@ -120,7 +119,7 @@ class MainActivity : AppCompatActivity() {
             if (!found)
                 binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
 
-            binding.buttonC!!.backgroundTintList = ContextCompat.getColorStateList(this, android.R.color.darker_gray)
+            binding.buttonC!!.setImageResource(R.drawable.button_c_disabled_blue)
             binding.buttonC!!.isEnabled = false
             isDone(rem, wordBank[currentIndex].hang)
 
@@ -138,7 +137,7 @@ class MainActivity : AppCompatActivity() {
             if (!found)
                 binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
 
-            binding.buttonD!!.backgroundTintList = ContextCompat.getColorStateList(this, android.R.color.darker_gray)
+            binding.buttonD!!.setImageResource(R.drawable.button_d_disabled_blue)
             binding.buttonD!!.isEnabled = false
             isDone(rem, wordBank[currentIndex].hang)
 
@@ -156,7 +155,7 @@ class MainActivity : AppCompatActivity() {
             if (!found)
                 binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
 
-            binding.buttonE!!.backgroundTintList = ContextCompat.getColorStateList(this, android.R.color.darker_gray)
+            binding.buttonE!!.setImageResource(R.drawable.button_e_disabled_blue)
             binding.buttonE!!.isEnabled = false
             isDone(rem, wordBank[currentIndex].hang)
 
@@ -174,7 +173,7 @@ class MainActivity : AppCompatActivity() {
             if (!found)
                 binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
 
-            binding.buttonF!!.backgroundTintList = ContextCompat.getColorStateList(this, android.R.color.darker_gray)
+            binding.buttonF!!.setImageResource(R.drawable.button_f_disabled_blue)
             binding.buttonF!!.isEnabled = false
             isDone(rem, wordBank[currentIndex].hang)
 
@@ -192,7 +191,7 @@ class MainActivity : AppCompatActivity() {
             if (!found)
                 binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
 
-            binding.buttonG!!.backgroundTintList = ContextCompat.getColorStateList(this, android.R.color.darker_gray)
+            binding.buttonG!!.setImageResource(R.drawable.button_g_disabled_blue)
             binding.buttonG!!.isEnabled = false
             isDone(rem, wordBank[currentIndex].hang)
 
@@ -210,7 +209,7 @@ class MainActivity : AppCompatActivity() {
             if (!found)
                 binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
 
-            binding.buttonH!!.backgroundTintList = ContextCompat.getColorStateList(this, android.R.color.darker_gray)
+            binding.buttonH!!.setImageResource(R.drawable.button_h_disabled_blue)
             binding.buttonH!!.isEnabled = false
             isDone(rem, wordBank[currentIndex].hang)
 
@@ -228,7 +227,7 @@ class MainActivity : AppCompatActivity() {
             if (!found)
                 binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
 
-            binding.buttonI!!.backgroundTintList = ContextCompat.getColorStateList(this, android.R.color.darker_gray)
+            binding.buttonI!!.setImageResource(R.drawable.button_i_disabled_blue)
             binding.buttonI!!.isEnabled = false
             isDone(rem, wordBank[currentIndex].hang)
 
@@ -246,7 +245,7 @@ class MainActivity : AppCompatActivity() {
             if (!found)
                 binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
 
-            binding.buttonJ!!.backgroundTintList = ContextCompat.getColorStateList(this, android.R.color.darker_gray)
+            binding.buttonJ!!.setImageResource(R.drawable.button_j_disabled_blue)
             binding.buttonJ!!.isEnabled = false
             isDone(rem, wordBank[currentIndex].hang)
 
@@ -264,7 +263,7 @@ class MainActivity : AppCompatActivity() {
             if (!found)
                 binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
 
-            binding.buttonK!!.backgroundTintList = ContextCompat.getColorStateList(this, android.R.color.darker_gray)
+            binding.buttonK!!.setImageResource(R.drawable.button_k_disabled_blue)
             binding.buttonK!!.isEnabled = false
             isDone(rem, wordBank[currentIndex].hang)
 
@@ -282,7 +281,7 @@ class MainActivity : AppCompatActivity() {
             if (!found)
                 binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
 
-            binding.buttonL!!.backgroundTintList = ContextCompat.getColorStateList(this, android.R.color.darker_gray)
+            binding.buttonL!!.setImageResource(R.drawable.button_l_disabled_blue)
             binding.buttonL!!.isEnabled = false
             isDone(rem, wordBank[currentIndex].hang)
 
@@ -300,7 +299,7 @@ class MainActivity : AppCompatActivity() {
             if (!found)
                 binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
 
-            binding.buttonM!!.backgroundTintList = ContextCompat.getColorStateList(this, android.R.color.darker_gray)
+            binding.buttonM!!.setImageResource(R.drawable.button_m_disabled_blue)
             binding.buttonM!!.isEnabled = false
             isDone(rem, wordBank[currentIndex].hang)
 
@@ -318,7 +317,7 @@ class MainActivity : AppCompatActivity() {
             if (!found)
                 binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
 
-            binding.buttonN!!.backgroundTintList = ContextCompat.getColorStateList(this, android.R.color.darker_gray)
+            binding.buttonN!!.setImageResource(R.drawable.button_n_disabled_blue)
             binding.buttonN!!.isEnabled = false
             isDone(rem, wordBank[currentIndex].hang)
 
@@ -336,7 +335,7 @@ class MainActivity : AppCompatActivity() {
             if (!found)
                 binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
 
-            binding.buttonO!!.backgroundTintList = ContextCompat.getColorStateList(this, android.R.color.darker_gray)
+            binding.buttonO!!.setImageResource(R.drawable.button_o_disabled_blue)
             binding.buttonO!!.isEnabled = false
             isDone(rem, wordBank[currentIndex].hang)
 
@@ -354,7 +353,7 @@ class MainActivity : AppCompatActivity() {
             if (!found)
                 binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
 
-            binding.buttonP!!.backgroundTintList = ContextCompat.getColorStateList(this, android.R.color.darker_gray)
+            binding.buttonP!!.setImageResource(R.drawable.button_p_disabled_blue)
             binding.buttonP!!.isEnabled = false
             isDone(rem, wordBank[currentIndex].hang)
 
@@ -372,7 +371,7 @@ class MainActivity : AppCompatActivity() {
             if (!found)
                 binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
 
-            binding.buttonQ!!.backgroundTintList = ContextCompat.getColorStateList(this, android.R.color.darker_gray)
+            binding.buttonQ!!.setImageResource(R.drawable.button_q_disabled_blue)
             binding.buttonQ!!.isEnabled = false
             isDone(rem, wordBank[currentIndex].hang)
 
@@ -390,7 +389,7 @@ class MainActivity : AppCompatActivity() {
             if (!found)
                 binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
 
-            binding.buttonR!!.backgroundTintList = ContextCompat.getColorStateList(this, android.R.color.darker_gray)
+            binding.buttonR!!.setImageResource(R.drawable.button_r_disabled_blue)
             binding.buttonR!!.isEnabled = false
             isDone(rem, wordBank[currentIndex].hang)
 
@@ -408,7 +407,7 @@ class MainActivity : AppCompatActivity() {
             if (!found)
                 binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
 
-            binding.buttonS!!.backgroundTintList = ContextCompat.getColorStateList(this, android.R.color.darker_gray)
+            binding.buttonS!!.setImageResource(R.drawable.button_s_disabled_blue)
             binding.buttonS!!.isEnabled = false
             isDone(rem, wordBank[currentIndex].hang)
 
@@ -426,7 +425,7 @@ class MainActivity : AppCompatActivity() {
             if (!found)
                 binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
 
-            binding.buttonT!!.backgroundTintList = ContextCompat.getColorStateList(this, android.R.color.darker_gray)
+            binding.buttonT!!.setImageResource(R.drawable.button_t_disabled_blue)
             binding.buttonT!!.isEnabled = false
             isDone(rem, wordBank[currentIndex].hang)
 
@@ -444,7 +443,7 @@ class MainActivity : AppCompatActivity() {
             if (!found)
                 binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
 
-            binding.buttonU!!.backgroundTintList = ContextCompat.getColorStateList(this, android.R.color.darker_gray)
+            binding.buttonU!!.setImageResource(R.drawable.button_u_disabled_blue)
             binding.buttonU!!.isEnabled = false
             isDone(rem, wordBank[currentIndex].hang)
 
@@ -462,7 +461,7 @@ class MainActivity : AppCompatActivity() {
             if (!found)
                 binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
 
-            binding.buttonV!!.backgroundTintList = ContextCompat.getColorStateList(this, android.R.color.darker_gray)
+            binding.buttonV!!.setImageResource(R.drawable.button_v_disabled_blue)
             binding.buttonV!!.isEnabled = false
             isDone(rem, wordBank[currentIndex].hang)
 
@@ -481,7 +480,7 @@ class MainActivity : AppCompatActivity() {
                 binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
 
             //binding.buttonW!!.backgroundTintList = ContextCompat.getColorStateList(this, android.R.color.darker_gray)
-            binding.buttonW!!.backgroundTintList = ContextCompat.getColorStateList(this, android.R.color.darker_gray)
+            binding.buttonW!!.setImageResource(R.drawable.button_w_disabled_blue)
             binding.buttonW!!.isEnabled = false
             isDone(rem, wordBank[currentIndex].hang)
 
@@ -499,7 +498,7 @@ class MainActivity : AppCompatActivity() {
             if (!found)
                 binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
 
-            binding.buttonX!!.backgroundTintList = ContextCompat.getColorStateList(this, android.R.color.darker_gray)
+            binding.buttonX!!.setImageResource(R.drawable.button_x_disabled_blue)
             binding.buttonX!!.isEnabled = false
             isDone(rem, wordBank[currentIndex].hang)
 
@@ -517,7 +516,7 @@ class MainActivity : AppCompatActivity() {
             if (!found)
                 binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
 
-            binding.buttonY!!.backgroundTintList = ContextCompat.getColorStateList(this, android.R.color.darker_gray)
+            binding.buttonY!!.setImageResource(R.drawable.button_y_disabled_blue)
             binding.buttonY!!.isEnabled = false
             isDone(rem, wordBank[currentIndex].hang)
 
@@ -535,7 +534,7 @@ class MainActivity : AppCompatActivity() {
             if (!found)
                 binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
 
-            binding.buttonZ!!.backgroundTintList = ContextCompat.getColorStateList(this, android.R.color.darker_gray)
+            binding.buttonZ!!.setImageResource(R.drawable.button_z_disabled_blue)
             binding.buttonZ!!.isEnabled = false
             isDone(rem, wordBank[currentIndex].hang)
 
@@ -578,9 +577,11 @@ class MainActivity : AppCompatActivity() {
     private fun disableButtons() {
         for (char in 'A'..'Z') {
             val buttonId = resources.getIdentifier("button$char", "id", packageName)
-            val buttonView = findViewById<Button>(buttonId)
+            val imageId = resources.getIdentifier("button_${char.lowercaseChar()}_disabled_blue", "drawable", packageName)
+            val buttonView = findViewById<ImageButton>(buttonId)
             if (buttonView != null) {
-                buttonView.backgroundTintList = ContextCompat.getColorStateList(this, android.R.color.darker_gray)
+                //buttonView.backgroundTintList = ContextCompat.getColorStateList(this, android.R.color.darker_gray)
+                buttonView.setImageResource(imageId)
                 buttonView.isEnabled = false
             }
         }
@@ -589,9 +590,10 @@ class MainActivity : AppCompatActivity() {
     private fun enableButtons() {
         for (char in 'A'..'Z') {
             val buttonId = resources.getIdentifier("button$char", "id", packageName)
-            val buttonView = findViewById<Button>(buttonId)
+            val imageId = resources.getIdentifier("button_${char.lowercaseChar()}_enabled_blue", "drawable", packageName)
+            val buttonView = findViewById<ImageButton>(buttonId)
             if (buttonView != null) {
-                buttonView.backgroundTintList = ContextCompat.getColorStateList(this, android.R.color.holo_purple)
+                buttonView.setImageResource(imageId)
                 buttonView.isEnabled = true
             }
         }
