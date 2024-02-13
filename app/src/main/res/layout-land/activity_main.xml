@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.2" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.4" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/vline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.333" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/vline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.0238" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/vline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.3095" />
+
+
+
+    <View
+        android:id="@+id/box1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@android:color/holo_blue_light"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/vline1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/hline2"
+        />
+
+    <TextView
+        android:id="@+id/instructions"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/instr1"
+        android:textSize="24sp"
+        android:gravity = "center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/vline1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/hline1"
+        />
+
+    <GridLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/keyboardrow1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:columnCount="7"
+        android:rowCount="1"
+        android:paddingTop="8dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="4dp"
+        android:background="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/vline1"
+        app:layout_constraintTop_toTopOf="@id/hline1"
+        app:layout_constraintBottom_toTopOf="@id/hline3"
+        >
+
+        <!-- Row 1 (7 buttons) -->
+        <Button
+            android:id="@+id/buttonQ"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Q"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:textSize="20sp"
+            android:visibility="visible" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Q"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:textSize="20sp"
+            android:visibility="visible" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Q"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:textSize="20sp"
+            android:visibility="visible" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Q"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:textSize="20sp"
+            android:visibility="visible" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Q"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:textSize="20sp"
+            android:visibility="visible" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Q"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:textSize="20sp"
+            android:visibility="visible" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Q"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:textSize="20sp"
+            android:visibility="visible" />
+
+    </GridLayout>
+
+
+    <GridLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/keyboardrow2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:columnCount="6"
+        android:rowCount="1"
+        android:paddingTop="4dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="4dp"
+        android:background="@android:color/black"
+        app:layout_constraintStart_toStartOf="@id/vline2"
+        app:layout_constraintEnd_toStartOf="@id/vline3"
+        app:layout_constraintTop_toTopOf="@id/hline3"
+        app:layout_constraintBottom_toTopOf="@id/hline4"
+        >
+
+        <!-- Row 2 (6 buttons) -->
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Q"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:textSize="20sp"
+            android:visibility="visible" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Q"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:textSize="20sp"
+            android:visibility="visible" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Q"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:textSize="20sp"
+            android:visibility="visible" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Q"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:textSize="20sp"
+            android:visibility="visible" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Q"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:textSize="20sp"
+            android:visibility="visible" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Q"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:textSize="20sp"
+            android:visibility="visible" />
+
+    </GridLayout>
+
+    <GridLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/keyboardrow3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:columnCount="7"
+        android:rowCount="1"
+        android:paddingTop="4dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="4dp"
+        android:background="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/vline1"
+        app:layout_constraintTop_toTopOf="@id/hline4"
+        app:layout_constraintBottom_toTopOf="@id/hline5"
+        >
+
+        <!-- Row 3 (7 buttons) -->
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Q"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:textSize="20sp"
+            android:visibility="visible" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Q"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:textSize="20sp"
+            android:visibility="visible" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Q"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:textSize="20sp"
+            android:visibility="visible" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Q"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:textSize="20sp"
+            android:visibility="visible" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Q"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:textSize="20sp"
+            android:visibility="visible" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Q"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:textSize="20sp"
+            android:visibility="visible" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Q"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:textSize="20sp"
+            android:visibility="visible" />
+
+    </GridLayout>
+
+    <GridLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/keyboardrow4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:columnCount="6"
+        android:rowCount="1"
+        android:paddingTop="4dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="8dp"
+        android:background="@android:color/black"
+        app:layout_constraintStart_toStartOf="@id/vline2"
+        app:layout_constraintEnd_toStartOf="@id/vline3"
+        app:layout_constraintTop_toTopOf="@id/hline5"
+        app:layout_constraintBottom_toTopOf="@id/hline2"
+        >
+
+        <!-- Row 4 (6 buttons) -->
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Q"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:textSize="20sp"
+            android:visibility="visible" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Q"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:textSize="20sp"
+            android:visibility="visible" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Q"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:textSize="20sp"
+            android:visibility="visible" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Q"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:textSize="20sp"
+            android:visibility="visible" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Q"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:textSize="20sp"
+            android:visibility="visible" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Q"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:textSize="20sp"
+            android:visibility="visible" />
+
+    </GridLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">JonathanThomas-Hangman</string>
+    <string name="instr1">Start a new game</string>
+    <string name="instr2">Choose a letter</string>
+    <string name="instr3">Correct!</string>
+    <string name="instr4">You lost.</string>
+    <string name="word1">CAB</string>
+    <string name="word2">BACKPACK</string>
+    <string name="word3">CAT</string>
+</resources>
