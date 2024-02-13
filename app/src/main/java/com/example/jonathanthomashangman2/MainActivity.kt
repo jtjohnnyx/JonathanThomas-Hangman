@@ -7,39 +7,31 @@ import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.viewModels
 import com.example.jonathanthomashangman2.databinding.ActivityMainBinding
 import java.util.LinkedList
+import kotlin.properties.Delegates
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    private lateinit var letters: MutableList<ImageView>
+    private val hangmanViewModel: HangmanViewModel by viewModels()
 
-    private val newhang = LinkedList(listOf(
+    private val newhang = listOf(
         R.drawable.hang_empty3,
         R.drawable.hang_head,
         R.drawable.hang_body,
         R.drawable.hang_larm,
         R.drawable.hang_rarm,
         R.drawable.hang_lleg,
-        R.drawable.hang_rleg))
-    //hang.add(R.drawable.hang_head)
-    //hang.add(R.drawable.hang_body)
-    //hang.add(R.drawable.hang_larm)
-    //hang.add(R.drawable.hang_rarm)
-    //hang.add(R.drawable.hang_lleg)
-    //hang.add(R.drawable.hang_rleg)
+        R.drawable.hang_rleg)
 
     private val wordBank = listOf(
-        Word(R.string.word1, listOf('A', 'P', 'P', 'L', 'E'), LinkedList(),5),
-        Word(R.string.word2, listOf('B', 'A', 'C', 'K', 'P','A','C','K'), LinkedList(),8),
-        Word(R.string.word3, listOf('C', 'A', 'T'), LinkedList(),3))
-
-    private var currentIndex = -1
-    
-    private var rem = 0
+        Word(R.string.word1, listOf('A', 'P', 'P', 'L', 'E'),5),
+        Word(R.string.word2, listOf('B', 'A', 'C', 'K', 'P','A','C','K'),8),
+        Word(R.string.word3, listOf('C', 'A', 'T'),3))
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,503 +39,631 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //val wordId = wordBank[currentIndex].textResId
-        //val ls = wordBank[currentIndex].ls
-        //val length = wordBank[currentIndex].length
-        //var rem = length
-        //ar done = false
-        disableButtons()
+        Log.d("VM", "Got a HangmanViewModel: $hangmanViewModel")
+
+        displayGame()
+        Log.d("bz", binding.buttonZ.isEnabled.toString())
 
         binding.newgame?.setOnClickListener {
             var rand : Int
             do {
                 rand = Random.nextInt(0, wordBank.size) // Generates a random number from 1 to 10
-            } while (rand == currentIndex)
-            currentIndex = rand
-            //currentIndex += 1
-            displayLetters(wordBank[currentIndex].length)
-            enableButtons()
-            rem = wordBank[currentIndex].length
-            //Log.d("Remainder", "$rem")
-            wordBank[currentIndex].hang = LinkedList(newhang)
-            //Log.d("LL", newhang.toString())
-            binding.instructions.text = getString(R.string.instr2)
-            binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
-        }
+            } while (rand == hangmanViewModel.getCurrentWord)
+            hangmanViewModel.setWord(rand)
+            
+            hangmanViewModel.resetHang()
+            
+            hangmanViewModel.setRem(wordBank[rand].length)
 
-        binding.buttonA?.setOnClickListener {
+            hangmanViewModel.setInstr(R.string.instr2)
+
+            hangmanViewModel.resetLetters()
+
+            hangmanViewModel.resetButtons()
+            
+            displayGame()
+
+        } 
+
+        binding.buttonA.setOnClickListener {
             var found = false
-            for (i in 0..<wordBank[currentIndex].length) {
-                if ( wordBank[currentIndex].ls[i] == 'A') {
-                    letters[i].setImageResource(R.drawable.bar_a)
+            for (i in 0..<wordBank[hangmanViewModel.getCurrentWord].length) {
+                if ( wordBank[hangmanViewModel.getCurrentWord].ls[i] == 'A') {
+                    findViewById<ImageView>(hangmanViewModel.getLetter(i).letterId).setImageResource(R.drawable.bar_a)
+                    hangmanViewModel.setLetter(i, R.drawable.bar_a)
                     found = true
-                    rem -= 1
+                    hangmanViewModel.decrRem()
                 }
             }
-            if (!found)
-                binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
+            if (!found) {
+                binding.hang.setImageResource(newhang[hangmanViewModel.getNextHang])
+                hangmanViewModel.incrHang()
+            }
 
-            binding.buttonA!!.setImageResource(R.drawable.button_a_disabled_blue)
-            binding.buttonA!!.isEnabled = false
-            isDone(rem, wordBank[currentIndex].hang)
+            binding.buttonA.setImageResource(R.drawable.button_a_disabled_blue)
+            binding.buttonA.isEnabled = false
+            hangmanViewModel.setButton(0, R.drawable.button_a_disabled_blue, false)
+            isDone(hangmanViewModel.getRem, hangmanViewModel.getNextHang)
 
         }
 
         binding.buttonB?.setOnClickListener {
             var found = false
-            for (i in 0..<wordBank[currentIndex].length) {
-                if ( wordBank[currentIndex].ls[i] == 'B') {
-                    letters[i].setImageResource(R.drawable.bar_b)
+            for (i in 0..<wordBank[hangmanViewModel.getCurrentWord].length) {
+                if ( wordBank[hangmanViewModel.getCurrentWord].ls[i] == 'B') {
+                    findViewById<ImageView>(hangmanViewModel.getLetter(i).letterId).setImageResource(R.drawable.bar_b)
+                    hangmanViewModel.setLetter(i, R.drawable.bar_b)
                     found = true
-                    rem -= 1
+                    hangmanViewModel.decrRem()
                 }
             }
-            if (!found)
-                binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
+            if (!found) {
+                binding.hang?.setImageResource(newhang[hangmanViewModel.getNextHang])
+                hangmanViewModel.incrHang()
+            }
 
             binding.buttonB!!.setImageResource(R.drawable.button_b_disabled_blue)
             binding.buttonB!!.isEnabled = false
-            isDone(rem, wordBank[currentIndex].hang)
+            hangmanViewModel.setButton(1, R.drawable.button_b_disabled_blue, false)
+            isDone(hangmanViewModel.getRem, hangmanViewModel.getNextHang)
 
         }
 
         binding.buttonC?.setOnClickListener {
             var found = false
-            for (i in 0..<wordBank[currentIndex].length) {
-                if ( wordBank[currentIndex].ls[i] == 'C') {
-                    letters[i].setImageResource(R.drawable.bar_c)
+            for (i in 0..<wordBank[hangmanViewModel.getCurrentWord].length) {
+                if ( wordBank[hangmanViewModel.getCurrentWord].ls[i] == 'C') {
+                    findViewById<ImageView>(hangmanViewModel.getLetter(i).letterId).setImageResource(R.drawable.bar_c)
+                    hangmanViewModel.setLetter(i, R.drawable.bar_c)
                     found = true
-                    rem -= 1
+                    hangmanViewModel.decrRem()
                 }
             }
-            if (!found)
-                binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
+            if (!found) {
+                binding.hang?.setImageResource(newhang[hangmanViewModel.getNextHang])
+                hangmanViewModel.incrHang()
+            }
 
             binding.buttonC!!.setImageResource(R.drawable.button_c_disabled_blue)
             binding.buttonC!!.isEnabled = false
-            isDone(rem, wordBank[currentIndex].hang)
+            hangmanViewModel.setButton(2, R.drawable.button_c_disabled_blue, false)
+            isDone(hangmanViewModel.getRem, hangmanViewModel.getNextHang)
 
         }
 
         binding.buttonD?.setOnClickListener {
             var found = false
-            for (i in 0..<wordBank[currentIndex].length) {
-                if ( wordBank[currentIndex].ls[i] == 'D') {
-                    letters[i].setImageResource(R.drawable.bar_d)
+            for (i in 0..<wordBank[hangmanViewModel.getCurrentWord].length) {
+                if ( wordBank[hangmanViewModel.getCurrentWord].ls[i] == 'D') {
+                    findViewById<ImageView>(hangmanViewModel.getLetter(i).letterId).setImageResource(R.drawable.bar_d)
+                    hangmanViewModel.setLetter(i, R.drawable.bar_d)
                     found = true
-                    rem -= 1
+                    hangmanViewModel.decrRem()
                 }
             }
-            if (!found)
-                binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
+            if (!found) {
+                binding.hang?.setImageResource(newhang[hangmanViewModel.getNextHang])
+                hangmanViewModel.incrHang()
+            }
 
             binding.buttonD!!.setImageResource(R.drawable.button_d_disabled_blue)
             binding.buttonD!!.isEnabled = false
-            isDone(rem, wordBank[currentIndex].hang)
+            hangmanViewModel.setButton(3, R.drawable.button_d_disabled_blue, false)
+            isDone(hangmanViewModel.getRem, hangmanViewModel.getNextHang)
 
         }
 
         binding.buttonE?.setOnClickListener {
             var found = false
-            for (i in 0..<wordBank[currentIndex].length) {
-                if ( wordBank[currentIndex].ls[i] == 'E') {
-                    letters[i].setImageResource(R.drawable.bar_e)
+            for (i in 0..<wordBank[hangmanViewModel.getCurrentWord].length) {
+                if ( wordBank[hangmanViewModel.getCurrentWord].ls[i] == 'E') {
+                    findViewById<ImageView>(hangmanViewModel.getLetter(i).letterId).setImageResource(R.drawable.bar_e)
+                    hangmanViewModel.setLetter(i, R.drawable.bar_e)
                     found = true
-                    rem -= 1
+                    hangmanViewModel.decrRem()
                 }
             }
-            if (!found)
-                binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
+            if (!found) {
+                binding.hang?.setImageResource(newhang[hangmanViewModel.getNextHang])
+                hangmanViewModel.incrHang()
+            }
 
             binding.buttonE!!.setImageResource(R.drawable.button_e_disabled_blue)
             binding.buttonE!!.isEnabled = false
-            isDone(rem, wordBank[currentIndex].hang)
+            hangmanViewModel.setButton(4, R.drawable.button_e_disabled_blue, false)
+            isDone(hangmanViewModel.getRem, hangmanViewModel.getNextHang)
 
         }
 
         binding.buttonF?.setOnClickListener {
             var found = false
-            for (i in 0..<wordBank[currentIndex].length) {
-                if ( wordBank[currentIndex].ls[i] == 'F') {
-                    letters[i].setImageResource(R.drawable.bar_f)
+            for (i in 0..<wordBank[hangmanViewModel.getCurrentWord].length) {
+                if ( wordBank[hangmanViewModel.getCurrentWord].ls[i] == 'F') {
+                    findViewById<ImageView>(hangmanViewModel.getLetter(i).letterId).setImageResource(R.drawable.bar_f)
+                    hangmanViewModel.setLetter(i, R.drawable.bar_f)
                     found = true
-                    rem -= 1
+                    hangmanViewModel.decrRem()
                 }
             }
-            if (!found)
-                binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
+            if (!found) {
+                binding.hang?.setImageResource(newhang[hangmanViewModel.getNextHang])
+                hangmanViewModel.incrHang()
+            }
 
             binding.buttonF!!.setImageResource(R.drawable.button_f_disabled_blue)
             binding.buttonF!!.isEnabled = false
-            isDone(rem, wordBank[currentIndex].hang)
+            hangmanViewModel.setButton(5, R.drawable.button_f_disabled_blue, false)
+            isDone(hangmanViewModel.getRem, hangmanViewModel.getNextHang)
 
         }
 
         binding.buttonG?.setOnClickListener {
             var found = false
-            for (i in 0..<wordBank[currentIndex].length) {
-                if ( wordBank[currentIndex].ls[i] == 'G') {
-                    letters[i].setImageResource(R.drawable.bar_g)
+            for (i in 0..<wordBank[hangmanViewModel.getCurrentWord].length) {
+                if ( wordBank[hangmanViewModel.getCurrentWord].ls[i] == 'G') {
+                    findViewById<ImageView>(hangmanViewModel.getLetter(i).letterId).setImageResource(R.drawable.bar_g)
+                    hangmanViewModel.setLetter(i, R.drawable.bar_g)
                     found = true
-                    rem -= 1
+                    hangmanViewModel.decrRem()
                 }
             }
-            if (!found)
-                binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
+            if (!found) {
+                binding.hang?.setImageResource(newhang[hangmanViewModel.getNextHang])
+                hangmanViewModel.incrHang()
+            }
 
             binding.buttonG!!.setImageResource(R.drawable.button_g_disabled_blue)
             binding.buttonG!!.isEnabled = false
-            isDone(rem, wordBank[currentIndex].hang)
+            hangmanViewModel.setButton(6, R.drawable.button_g_disabled_blue, false)
+            isDone(hangmanViewModel.getRem, hangmanViewModel.getNextHang)
 
         }
 
         binding.buttonH?.setOnClickListener {
             var found = false
-            for (i in 0..<wordBank[currentIndex].length) {
-                if ( wordBank[currentIndex].ls[i] == 'H') {
-                    letters[i].setImageResource(R.drawable.bar_h)
+            for (i in 0..<wordBank[hangmanViewModel.getCurrentWord].length) {
+                if ( wordBank[hangmanViewModel.getCurrentWord].ls[i] == 'H') {
+                    findViewById<ImageView>(hangmanViewModel.getLetter(i).letterId).setImageResource(R.drawable.bar_h)
+                    hangmanViewModel.setLetter(i, R.drawable.bar_h)
                     found = true
-                    rem -= 1
+                    hangmanViewModel.decrRem()
                 }
             }
-            if (!found)
-                binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
+            if (!found) {
+                binding.hang?.setImageResource(newhang[hangmanViewModel.getNextHang])
+                hangmanViewModel.incrHang()
+            }
 
             binding.buttonH!!.setImageResource(R.drawable.button_h_disabled_blue)
             binding.buttonH!!.isEnabled = false
-            isDone(rem, wordBank[currentIndex].hang)
+            hangmanViewModel.setButton(7, R.drawable.button_h_disabled_blue, false)
+            isDone(hangmanViewModel.getRem, hangmanViewModel.getNextHang)
 
         }
 
         binding.buttonI?.setOnClickListener {
             var found = false
-            for (i in 0..<wordBank[currentIndex].length) {
-                if ( wordBank[currentIndex].ls[i] == 'I') {
-                    letters[i].setImageResource(R.drawable.bar_i)
+            for (i in 0..<wordBank[hangmanViewModel.getCurrentWord].length) {
+                if ( wordBank[hangmanViewModel.getCurrentWord].ls[i] == 'I') {
+                    findViewById<ImageView>(hangmanViewModel.getLetter(i).letterId).setImageResource(R.drawable.bar_i)
+                    hangmanViewModel.setLetter(i, R.drawable.bar_i)
                     found = true
-                    rem -= 1
+                    hangmanViewModel.decrRem()
                 }
             }
-            if (!found)
-                binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
+            if (!found) {
+                binding.hang?.setImageResource(newhang[hangmanViewModel.getNextHang])
+                hangmanViewModel.incrHang()
+            }
 
             binding.buttonI!!.setImageResource(R.drawable.button_i_disabled_blue)
             binding.buttonI!!.isEnabled = false
-            isDone(rem, wordBank[currentIndex].hang)
+            hangmanViewModel.setButton(8, R.drawable.button_i_disabled_blue, false)
+            isDone(hangmanViewModel.getRem, hangmanViewModel.getNextHang)
 
         }
 
         binding.buttonJ?.setOnClickListener {
             var found = false
-            for (i in 0..<wordBank[currentIndex].length) {
-                if ( wordBank[currentIndex].ls[i] == 'J') {
-                    letters[i].setImageResource(R.drawable.bar_j)
+            for (i in 0..<wordBank[hangmanViewModel.getCurrentWord].length) {
+                if ( wordBank[hangmanViewModel.getCurrentWord].ls[i] == 'J') {
+                    findViewById<ImageView>(hangmanViewModel.getLetter(i).letterId).setImageResource(R.drawable.bar_j)
+                    hangmanViewModel.setLetter(i, R.drawable.bar_j)
                     found = true
-                    rem -= 1
+                    hangmanViewModel.decrRem()
                 }
             }
-            if (!found)
-                binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
+            if (!found) {
+                binding.hang?.setImageResource(newhang[hangmanViewModel.getNextHang])
+                hangmanViewModel.incrHang()
+            }
 
             binding.buttonJ!!.setImageResource(R.drawable.button_j_disabled_blue)
             binding.buttonJ!!.isEnabled = false
-            isDone(rem, wordBank[currentIndex].hang)
+            hangmanViewModel.setButton(9, R.drawable.button_j_disabled_blue, false)
+            isDone(hangmanViewModel.getRem, hangmanViewModel.getNextHang)
 
         }
 
         binding.buttonK?.setOnClickListener {
             var found = false
-            for (i in 0..<wordBank[currentIndex].length) {
-                if ( wordBank[currentIndex].ls[i] == 'K') {
-                    letters[i].setImageResource(R.drawable.bar_k)
+            for (i in 0..<wordBank[hangmanViewModel.getCurrentWord].length) {
+                if ( wordBank[hangmanViewModel.getCurrentWord].ls[i] == 'K') {
+                    findViewById<ImageView>(hangmanViewModel.getLetter(i).letterId).setImageResource(R.drawable.bar_k)
+                    hangmanViewModel.setLetter(i, R.drawable.bar_k)
                     found = true
-                    rem -= 1
+                    hangmanViewModel.decrRem()
                 }
             }
-            if (!found)
-                binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
+            if (!found) {
+                binding.hang?.setImageResource(newhang[hangmanViewModel.getNextHang])
+                hangmanViewModel.incrHang()
+            }
 
             binding.buttonK!!.setImageResource(R.drawable.button_k_disabled_blue)
             binding.buttonK!!.isEnabled = false
-            isDone(rem, wordBank[currentIndex].hang)
+            hangmanViewModel.setButton(10, R.drawable.button_k_disabled_blue, false)
+            isDone(hangmanViewModel.getRem, hangmanViewModel.getNextHang)
 
         }
 
         binding.buttonL?.setOnClickListener {
             var found = false
-            for (i in 0..<wordBank[currentIndex].length) {
-                if ( wordBank[currentIndex].ls[i] == 'L') {
-                    letters[i].setImageResource(R.drawable.bar_l)
+            for (i in 0..<wordBank[hangmanViewModel.getCurrentWord].length) {
+                if ( wordBank[hangmanViewModel.getCurrentWord].ls[i] == 'L') {
+                    findViewById<ImageView>(hangmanViewModel.getLetter(i).letterId).setImageResource(R.drawable.bar_l)
+                    hangmanViewModel.setLetter(i, R.drawable.bar_l)
                     found = true
-                    rem -= 1
+                    hangmanViewModel.decrRem()
                 }
             }
-            if (!found)
-                binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
+            if (!found) {
+                binding.hang?.setImageResource(newhang[hangmanViewModel.getNextHang])
+                hangmanViewModel.incrHang()
+            }
 
             binding.buttonL!!.setImageResource(R.drawable.button_l_disabled_blue)
             binding.buttonL!!.isEnabled = false
-            isDone(rem, wordBank[currentIndex].hang)
+            hangmanViewModel.setButton(11, R.drawable.button_l_disabled_blue, false)
+            isDone(hangmanViewModel.getRem, hangmanViewModel.getNextHang)
 
         }
 
         binding.buttonM?.setOnClickListener {
             var found = false
-            for (i in 0..<wordBank[currentIndex].length) {
-                if ( wordBank[currentIndex].ls[i] == 'M') {
-                    letters[i].setImageResource(R.drawable.bar_m)
+            for (i in 0..<wordBank[hangmanViewModel.getCurrentWord].length) {
+                if ( wordBank[hangmanViewModel.getCurrentWord].ls[i] == 'M') {
+                    findViewById<ImageView>(hangmanViewModel.getLetter(i).letterId).setImageResource(R.drawable.bar_m)
+                    hangmanViewModel.setLetter(i, R.drawable.bar_m)
                     found = true
-                    rem -= 1
+                    hangmanViewModel.decrRem()
                 }
             }
-            if (!found)
-                binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
+            if (!found) {
+                binding.hang?.setImageResource(newhang[hangmanViewModel.getNextHang])
+                hangmanViewModel.incrHang()
+            }
 
             binding.buttonM!!.setImageResource(R.drawable.button_m_disabled_blue)
             binding.buttonM!!.isEnabled = false
-            isDone(rem, wordBank[currentIndex].hang)
+            hangmanViewModel.setButton(12, R.drawable.button_m_disabled_blue, false)
+            isDone(hangmanViewModel.getRem, hangmanViewModel.getNextHang)
 
         }
 
         binding.buttonN?.setOnClickListener {
             var found = false
-            for (i in 0..<wordBank[currentIndex].length) {
-                if ( wordBank[currentIndex].ls[i] == 'N') {
-                    letters[i].setImageResource(R.drawable.bar_n)
+            for (i in 0..<wordBank[hangmanViewModel.getCurrentWord].length) {
+                if ( wordBank[hangmanViewModel.getCurrentWord].ls[i] == 'N') {
+                    findViewById<ImageView>(hangmanViewModel.getLetter(i).letterId).setImageResource(R.drawable.bar_n)
+                    hangmanViewModel.setLetter(i, R.drawable.bar_n)
                     found = true
-                    rem -= 1
+                    hangmanViewModel.decrRem()
                 }
             }
-            if (!found)
-                binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
+            if (!found) {
+                binding.hang?.setImageResource(newhang[hangmanViewModel.getNextHang])
+                hangmanViewModel.incrHang()
+            }
 
             binding.buttonN!!.setImageResource(R.drawable.button_n_disabled_blue)
             binding.buttonN!!.isEnabled = false
-            isDone(rem, wordBank[currentIndex].hang)
+            hangmanViewModel.setButton(13, R.drawable.button_n_disabled_blue, false)
+            isDone(hangmanViewModel.getRem, hangmanViewModel.getNextHang)
 
         }
 
         binding.buttonO?.setOnClickListener {
             var found = false
-            for (i in 0..<wordBank[currentIndex].length) {
-                if ( wordBank[currentIndex].ls[i] == 'O') {
-                    letters[i].setImageResource(R.drawable.bar_o)
+            for (i in 0..<wordBank[hangmanViewModel.getCurrentWord].length) {
+                if ( wordBank[hangmanViewModel.getCurrentWord].ls[i] == 'O') {
+                    findViewById<ImageView>(hangmanViewModel.getLetter(i).letterId).setImageResource(R.drawable.bar_o)
+                    hangmanViewModel.setLetter(i, R.drawable.bar_o)
                     found = true
-                    rem -= 1
+                    hangmanViewModel.decrRem()
                 }
             }
-            if (!found)
-                binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
+            if (!found) {
+                binding.hang?.setImageResource(newhang[hangmanViewModel.getNextHang])
+                hangmanViewModel.incrHang()
+            }
 
             binding.buttonO!!.setImageResource(R.drawable.button_o_disabled_blue)
             binding.buttonO!!.isEnabled = false
-            isDone(rem, wordBank[currentIndex].hang)
+            hangmanViewModel.setButton(14, R.drawable.button_o_disabled_blue, false)
+            isDone(hangmanViewModel.getRem, hangmanViewModel.getNextHang)
 
         }
 
         binding.buttonP?.setOnClickListener {
             var found = false
-            for (i in 0..<wordBank[currentIndex].length) {
-                if ( wordBank[currentIndex].ls[i] == 'P') {
-                    letters[i].setImageResource(R.drawable.bar_p)
+            for (i in 0..<wordBank[hangmanViewModel.getCurrentWord].length) {
+                if ( wordBank[hangmanViewModel.getCurrentWord].ls[i] == 'P') {
+                    findViewById<ImageView>(hangmanViewModel.getLetter(i).letterId).setImageResource(R.drawable.bar_p)
+                    hangmanViewModel.setLetter(i, R.drawable.bar_p)
                     found = true
-                    rem -= 1
+                    hangmanViewModel.decrRem()
                 }
             }
-            if (!found)
-                binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
+            if (!found) {
+                binding.hang?.setImageResource(newhang[hangmanViewModel.getNextHang])
+                hangmanViewModel.incrHang()
+            }
 
             binding.buttonP!!.setImageResource(R.drawable.button_p_disabled_blue)
             binding.buttonP!!.isEnabled = false
-            isDone(rem, wordBank[currentIndex].hang)
+            hangmanViewModel.setButton(15, R.drawable.button_p_disabled_blue, false)
+            isDone(hangmanViewModel.getRem, hangmanViewModel.getNextHang)
 
         }
 
         binding.buttonQ?.setOnClickListener {
             var found = false
-            for (i in 0..<wordBank[currentIndex].length) {
-                if ( wordBank[currentIndex].ls[i] == 'Q') {
-                    letters[i].setImageResource(R.drawable.bar_q)
+            for (i in 0..<wordBank[hangmanViewModel.getCurrentWord].length) {
+                if ( wordBank[hangmanViewModel.getCurrentWord].ls[i] == 'Q') {
+                    findViewById<ImageView>(hangmanViewModel.getLetter(i).letterId).setImageResource(R.drawable.bar_q)
+                    hangmanViewModel.setLetter(i, R.drawable.bar_q)
                     found = true
-                    rem -= 1
+                    hangmanViewModel.decrRem()
                 }
             }
-            if (!found)
-                binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
+            if (!found) {
+                binding.hang?.setImageResource(newhang[hangmanViewModel.getNextHang])
+                hangmanViewModel.incrHang()
+            }
 
             binding.buttonQ!!.setImageResource(R.drawable.button_q_disabled_blue)
             binding.buttonQ!!.isEnabled = false
-            isDone(rem, wordBank[currentIndex].hang)
+            hangmanViewModel.setButton(16, R.drawable.button_q_disabled_blue, false)
+            isDone(hangmanViewModel.getRem, hangmanViewModel.getNextHang)
 
         }
 
         binding.buttonR?.setOnClickListener {
             var found = false
-            for (i in 0..<wordBank[currentIndex].length) {
-                if ( wordBank[currentIndex].ls[i] == 'R') {
-                    letters[i].setImageResource(R.drawable.bar_r)
+            for (i in 0..<wordBank[hangmanViewModel.getCurrentWord].length) {
+                if ( wordBank[hangmanViewModel.getCurrentWord].ls[i] == 'R') {
+                    findViewById<ImageView>(hangmanViewModel.getLetter(i).letterId).setImageResource(R.drawable.bar_r)
+                    hangmanViewModel.setLetter(i, R.drawable.bar_r)
                     found = true
-                    rem -= 1
+                    hangmanViewModel.decrRem()
                 }
             }
-            if (!found)
-                binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
+            if (!found) {
+                binding.hang?.setImageResource(newhang[hangmanViewModel.getNextHang])
+                hangmanViewModel.incrHang()
+            }
 
             binding.buttonR!!.setImageResource(R.drawable.button_r_disabled_blue)
             binding.buttonR!!.isEnabled = false
-            isDone(rem, wordBank[currentIndex].hang)
+            hangmanViewModel.setButton(17, R.drawable.button_r_disabled_blue, false)
+            isDone(hangmanViewModel.getRem, hangmanViewModel.getNextHang)
 
         }
 
         binding.buttonS?.setOnClickListener {
             var found = false
-            for (i in 0..<wordBank[currentIndex].length) {
-                if ( wordBank[currentIndex].ls[i] == 'S') {
-                    letters[i].setImageResource(R.drawable.bar_s)
+            for (i in 0..<wordBank[hangmanViewModel.getCurrentWord].length) {
+                if ( wordBank[hangmanViewModel.getCurrentWord].ls[i] == 'S') {
+                    findViewById<ImageView>(hangmanViewModel.getLetter(i).letterId).setImageResource(R.drawable.bar_s)
+                    hangmanViewModel.setLetter(i, R.drawable.bar_s)
                     found = true
-                    rem -= 1
+                    hangmanViewModel.decrRem()
                 }
             }
-            if (!found)
-                binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
+            if (!found) {
+                binding.hang?.setImageResource(newhang[hangmanViewModel.getNextHang])
+                hangmanViewModel.incrHang()
+            }
 
             binding.buttonS!!.setImageResource(R.drawable.button_s_disabled_blue)
             binding.buttonS!!.isEnabled = false
-            isDone(rem, wordBank[currentIndex].hang)
+            hangmanViewModel.setButton(18, R.drawable.button_s_disabled_blue, false)
+            isDone(hangmanViewModel.getRem, hangmanViewModel.getNextHang)
 
         }
 
         binding.buttonT?.setOnClickListener {
             var found = false
-            for (i in 0..<wordBank[currentIndex].length) {
-                if ( wordBank[currentIndex].ls[i] == 'T') {
-                    letters[i].setImageResource(R.drawable.bar_t)
+            for (i in 0..<wordBank[hangmanViewModel.getCurrentWord].length) {
+                if ( wordBank[hangmanViewModel.getCurrentWord].ls[i] == 'T') {
+                    findViewById<ImageView>(hangmanViewModel.getLetter(i).letterId).setImageResource(R.drawable.bar_t)
+                    hangmanViewModel.setLetter(i, R.drawable.bar_t)
                     found = true
-                    rem -= 1
+                    hangmanViewModel.decrRem()
                 }
             }
-            if (!found)
-                binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
+            if (!found) {
+                binding.hang?.setImageResource(newhang[hangmanViewModel.getNextHang])
+                hangmanViewModel.incrHang()
+            }
 
             binding.buttonT!!.setImageResource(R.drawable.button_t_disabled_blue)
             binding.buttonT!!.isEnabled = false
-            isDone(rem, wordBank[currentIndex].hang)
+            hangmanViewModel.setButton(19, R.drawable.button_t_disabled_blue, false)
+            //Log.d("rem", hangmanViewModel.getRem.toString())
+            isDone(hangmanViewModel.getRem, hangmanViewModel.getNextHang)
 
         }
 
         binding.buttonU?.setOnClickListener {
             var found = false
-            for (i in 0..<wordBank[currentIndex].length) {
-                if ( wordBank[currentIndex].ls[i] == 'U') {
-                    letters[i].setImageResource(R.drawable.bar_u)
+            for (i in 0..<wordBank[hangmanViewModel.getCurrentWord].length) {
+                if ( wordBank[hangmanViewModel.getCurrentWord].ls[i] == 'U') {
+                    findViewById<ImageView>(hangmanViewModel.getLetter(i).letterId).setImageResource(R.drawable.bar_u)
+                    hangmanViewModel.setLetter(i, R.drawable.bar_u)
                     found = true
-                    rem -= 1
+                    hangmanViewModel.decrRem()
                 }
             }
-            if (!found)
-                binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
+            if (!found) {
+                binding.hang?.setImageResource(newhang[hangmanViewModel.getNextHang])
+                hangmanViewModel.incrHang()
+            }
 
             binding.buttonU!!.setImageResource(R.drawable.button_u_disabled_blue)
             binding.buttonU!!.isEnabled = false
-            isDone(rem, wordBank[currentIndex].hang)
+            hangmanViewModel.setButton(20, R.drawable.button_u_disabled_blue, false)
+            isDone(hangmanViewModel.getRem, hangmanViewModel.getNextHang)
 
         }
 
         binding.buttonV?.setOnClickListener {
             var found = false
-            for (i in 0..<wordBank[currentIndex].length) {
-                if ( wordBank[currentIndex].ls[i] == 'V') {
-                    letters[i].setImageResource(R.drawable.bar_v)
+            for (i in 0..<wordBank[hangmanViewModel.getCurrentWord].length) {
+                if ( wordBank[hangmanViewModel.getCurrentWord].ls[i] == 'V') {
+                    findViewById<ImageView>(hangmanViewModel.getLetter(i).letterId).setImageResource(R.drawable.bar_v)
+                    hangmanViewModel.setLetter(i, R.drawable.bar_v)
                     found = true
-                    rem -= 1
+                    hangmanViewModel.decrRem()
                 }
             }
-            if (!found)
-                binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
+            if (!found) {
+                binding.hang?.setImageResource(newhang[hangmanViewModel.getNextHang])
+                hangmanViewModel.incrHang()
+            }
 
             binding.buttonV!!.setImageResource(R.drawable.button_v_disabled_blue)
             binding.buttonV!!.isEnabled = false
-            isDone(rem, wordBank[currentIndex].hang)
+            hangmanViewModel.setButton(21, R.drawable.button_v_disabled_blue, false)
+            isDone(hangmanViewModel.getRem, hangmanViewModel.getNextHang)
 
         }
 
         binding.buttonW?.setOnClickListener {
             var found = false
-            for (i in 0..<wordBank[currentIndex].length) {
-                if ( wordBank[currentIndex].ls[i] == 'W') {
-                    letters[i].setImageResource(R.drawable.bar_w)
+            for (i in 0..<wordBank[hangmanViewModel.getCurrentWord].length) {
+                if ( wordBank[hangmanViewModel.getCurrentWord].ls[i] == 'W') {
+                    findViewById<ImageView>(hangmanViewModel.getLetter(i).letterId).setImageResource(R.drawable.bar_w)
+                    hangmanViewModel.setLetter(i, R.drawable.bar_w)
                     found = true
-                    rem -= 1
+                    hangmanViewModel.decrRem()
                 }
             }
-            if (!found)
-                binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
+            if (!found) {
+                binding.hang?.setImageResource(newhang[hangmanViewModel.getNextHang])
+                hangmanViewModel.incrHang()
+            }
 
-            //binding.buttonW!!.backgroundTintList = ContextCompat.getColorStateList(this, android.R.color.darker_gray)
             binding.buttonW!!.setImageResource(R.drawable.button_w_disabled_blue)
             binding.buttonW!!.isEnabled = false
-            isDone(rem, wordBank[currentIndex].hang)
+            hangmanViewModel.setButton(22, R.drawable.button_w_disabled_blue, false)
+            isDone(hangmanViewModel.getRem, hangmanViewModel.getNextHang)
 
         }
 
         binding.buttonX?.setOnClickListener {
             var found = false
-            for (i in 0..<wordBank[currentIndex].length) {
-                if ( wordBank[currentIndex].ls[i] == 'X') {
-                    letters[i].setImageResource(R.drawable.bar_x)
+            for (i in 0..<wordBank[hangmanViewModel.getCurrentWord].length) {
+                if ( wordBank[hangmanViewModel.getCurrentWord].ls[i] == 'X') {
+                    findViewById<ImageView>(hangmanViewModel.getLetter(i).letterId).setImageResource(R.drawable.bar_x)
+                    hangmanViewModel.setLetter(i, R.drawable.bar_x)
                     found = true
-                    rem -= 1
+                    hangmanViewModel.decrRem()
                 }
             }
-            if (!found)
-                binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
+            if (!found) {
+                binding.hang?.setImageResource(newhang[hangmanViewModel.getNextHang])
+                hangmanViewModel.incrHang()
+            }
 
             binding.buttonX!!.setImageResource(R.drawable.button_x_disabled_blue)
             binding.buttonX!!.isEnabled = false
-            isDone(rem, wordBank[currentIndex].hang)
+            hangmanViewModel.setButton(23, R.drawable.button_x_disabled_blue, false)
+            isDone(hangmanViewModel.getRem, hangmanViewModel.getNextHang)
 
         }
 
         binding.buttonY?.setOnClickListener {
             var found = false
-            for (i in 0..<wordBank[currentIndex].length) {
-                if ( wordBank[currentIndex].ls[i] == 'Y') {
-                    letters[i].setImageResource(R.drawable.bar_y)
+            for (i in 0..<wordBank[hangmanViewModel.getCurrentWord].length) {
+                if ( wordBank[hangmanViewModel.getCurrentWord].ls[i] == 'Y') {
+                    findViewById<ImageView>(hangmanViewModel.getLetter(i).letterId).setImageResource(R.drawable.bar_y)
+                    hangmanViewModel.setLetter(i, R.drawable.bar_y)
                     found = true
-                    rem -= 1
+                    hangmanViewModel.decrRem()
                 }
             }
-            if (!found)
-                binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
+            if (!found) {
+                binding.hang?.setImageResource(newhang[hangmanViewModel.getNextHang])
+                hangmanViewModel.incrHang()
+            }
 
             binding.buttonY!!.setImageResource(R.drawable.button_y_disabled_blue)
             binding.buttonY!!.isEnabled = false
-            isDone(rem, wordBank[currentIndex].hang)
+            hangmanViewModel.setButton(24, R.drawable.button_y_disabled_blue, false)
+            isDone(hangmanViewModel.getRem, hangmanViewModel.getNextHang)
 
         }
 
         binding.buttonZ?.setOnClickListener {
             var found = false
-            for (i in 0..<wordBank[currentIndex].length) {
-                if ( wordBank[currentIndex].ls[i] == 'Z') {
-                    letters[i].setImageResource(R.drawable.bar_z)
+            for (i in 0..<wordBank[hangmanViewModel.getCurrentWord].length) {
+                if ( wordBank[hangmanViewModel.getCurrentWord].ls[i] == 'Z') {
+                    findViewById<ImageView>(hangmanViewModel.getLetter(i).letterId).setImageResource(R.drawable.bar_z)
+                    hangmanViewModel.setLetter(i, R.drawable.bar_z)
                     found = true
-                    rem -= 1
+                    hangmanViewModel.decrRem()
                 }
             }
-            if (!found)
-                binding.hang?.setImageResource(wordBank[currentIndex].hang.poll())
+            if (!found) {
+                binding.hang?.setImageResource(newhang[hangmanViewModel.getNextHang])
+                hangmanViewModel.incrHang()
+            }
 
             binding.buttonZ!!.setImageResource(R.drawable.button_z_disabled_blue)
             binding.buttonZ!!.isEnabled = false
-            isDone(rem, wordBank[currentIndex].hang)
+            hangmanViewModel.setButton(25, R.drawable.button_z_disabled_blue, false)
+            isDone(hangmanViewModel.getRem, hangmanViewModel.getNextHang)
 
         }
 
     }
 
-    private fun displayLetters(length: Int) {
-        letters = mutableListOf()
+    private fun displayGame() {
+        //hangmanViewModel.getCurrentWord = HangmanViewModel.hangmanViewModel.getCurrentWord
+        //currentHang = hangmanViewModel.getCurrentHang
+        //rem = HangmanViewModel.rem
+        //letters = HangmanViewModel.letters
+        Log.d("newhang", newhang.toString())
+        displayHang()
+        displayLetters()
+        displayButtons()
+        findViewById<TextView>(R.id.instructions).text = getString(hangmanViewModel.getInstr)
+     }
+
+
+    private fun displayHang() {
+        if (hangmanViewModel.getNextHang == 0) {
+            findViewById<ImageView>(R.id.hang).setImageResource(newhang[hangmanViewModel.getNextHang])
+            hangmanViewModel.incrHang()
+        }
+        else
+            findViewById<ImageView>(R.id.hang).setImageResource(newhang[hangmanViewModel.getNextHang - 1])
+    }
+
+    private fun displayLetters() {
+        /*
         for (i in 1..9) {
             val letterId = resources.getIdentifier("letter$i", "id", packageName)
             val letterView = findViewById<ImageView>(letterId)
@@ -555,19 +675,37 @@ class MainActivity : AppCompatActivity() {
                 else
                     letterView.visibility = View.INVISIBLE
             }
+        }*/
+        for (i in 0..8) {
+            var letter = findViewById<ImageView>(hangmanViewModel.getLetter(i).letterId)
+            letter.setImageResource(hangmanViewModel.getLetter(i).imageId)
+            if (i < wordBank[hangmanViewModel.getCurrentWord].length)
+                letter.visibility = View.VISIBLE
+            else
+                letter.visibility = View.INVISIBLE
         }
     }
 
-    private fun isDone(rem: Int, hang: LinkedList<Int>): Boolean {
+    private fun displayButtons() {
+        for (i in 0..25) {
+            var button = findViewById<ImageView>(hangmanViewModel.getButton(i).buttonId)
+            button.setImageResource(hangmanViewModel.getButton(i).imageId)
+            button.isEnabled = hangmanViewModel.getButton(i).enabled
+        }
+    }
+
+    private fun isDone(rem: Int, nextHang: Int): Boolean {
         var instr = findViewById<TextView>(R.id.instructions)
 
         if (rem == 0) {
             instr.text = getString(R.string.instr3)
+            hangmanViewModel.setInstr(R.string.instr3)
             disableButtons()
             return true
         }
-        if (hang.size == 0) {
+        if (nextHang > 6) {
             instr.text = getString(R.string.instr4)
+            hangmanViewModel.setInstr(R.string.instr4)
             disableButtons()
             return true
         }
@@ -575,15 +713,19 @@ class MainActivity : AppCompatActivity() {
     }
     
     private fun disableButtons() {
-        for (char in 'A'..'Z') {
+        /*for (char in 'A'..'Z') {
             val buttonId = resources.getIdentifier("button$char", "id", packageName)
             val imageId = resources.getIdentifier("button_${char.lowercaseChar()}_disabled_blue", "drawable", packageName)
             val buttonView = findViewById<ImageButton>(buttonId)
             if (buttonView != null) {
                 //buttonView.backgroundTintList = ContextCompat.getColorStateList(this, android.R.color.darker_gray)
-                buttonView.setImageResource(imageId)
+                //buttonView.setImageResource(imageId)
                 buttonView.isEnabled = false
             }
+        }*/
+        for (i in 0..25) {
+            findViewById<ImageView>(hangmanViewModel.getButton(i).buttonId).isEnabled = false
+            hangmanViewModel.setButton(i, hangmanViewModel.getButton(i).imageId, false)
         }
     }
 
