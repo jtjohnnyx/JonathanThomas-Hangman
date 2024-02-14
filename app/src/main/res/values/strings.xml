@@ -2,9 +2,12 @@
     <string name="app_name">JonathanThomas-Hangman</string>
     <string name="instr1">START A NEW GAME</string>
     <string name="instr2">CHOOSE A LETTER</string>
-    <string name="instr3">CORRECT!</string>
+    <string name="instr3">YOU WON!</string>
     <string name="instr4">YOU LOST.</string>
-    <string name="word1">CAB</string>
+    <string name="correct_toast">Correct!</string>
+    <string name="incorrect_toast">Incorrect!</string>
+    <string name="hint_toast">Hint not available!</string>
+    <string name="word1">APPLE</string>
     <string name="word2">BACKPACK</string>
     <string name="word3">CAT</string>
 </resources>

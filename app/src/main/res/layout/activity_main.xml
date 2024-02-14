@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.75" />
+        app:layout_constraintGuide_percent="0.75239396" />
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -81,6 +81,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Game"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="@id/vline1p"
         app:layout_constraintTop_toTopOf="@id/hline6p"
         />

@@ -1,0 +1,772 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hline1h"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.75" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hline2h"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.107" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hline3h"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.214" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hline4h"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.321" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hline5h"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.429" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hline6h"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.536" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hline7h"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.643" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hline8h"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.033" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hline9h"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.717" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hline10h"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.783" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hline11h"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.967" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/vline1h"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.333" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/vline2h"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.033" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/vline3h"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.3" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/vline4h"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.367" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/vline5h"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.967" />
+
+    <View
+        android:id="@+id/box1h"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@android:color/holo_blue_light"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/vline1h"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/hline1h"
+        />
+
+    <TextView
+        android:id="@+id/instructions"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/instr1"
+        android:textColor="@color/black"
+        android:fontFamily="monospace"
+        android:textStyle="bold"
+        app:autoSizeTextType="uniform"
+        app:autoSizeMinTextSize="24sp"
+        app:autoSizeMaxTextSize="32sp"
+        android:gravity = "center"
+        app:layout_constraintStart_toStartOf="@id/vline2h"
+        app:layout_constraintEnd_toEndOf="@id/vline3h"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/hline2h"
+        />
+
+    <GridLayout
+        android:id="@+id/keyboardrow1h"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:columnCount="4"
+        android:paddingLeft="8dp"
+        android:paddingTop="8dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="4dp"
+        android:rowCount="1"
+        app:layout_constraintStart_toStartOf="@id/vline2h"
+        app:layout_constraintEnd_toEndOf="@id/vline3h"
+        app:layout_constraintTop_toTopOf="@id/hline2h"
+        app:layout_constraintBottom_toTopOf="@id/hline3h" >
+
+
+        <ImageButton
+            android:id="@+id/buttonA"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/button_a_enabled_blue" />
+
+
+
+        <ImageButton
+            android:id="@+id/buttonB"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/button_b_enabled_blue" />
+
+
+        <ImageButton
+            android:id="@+id/buttonC"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/button_c_enabled_blue" />
+
+
+        <ImageButton
+            android:id="@+id/buttonD"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/button_d_enabled_blue" />
+
+    </GridLayout>
+
+    <GridLayout
+        android:id="@+id/keyboardrow2h"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:columnCount="5"
+        android:paddingLeft="8dp"
+        android:paddingTop="8dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="4dp"
+        android:rowCount="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/vline1h"
+        app:layout_constraintTop_toTopOf="@id/hline3h"
+        app:layout_constraintBottom_toTopOf="@id/hline4h" >
+
+        <ImageButton
+            android:id="@+id/buttonE"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/button_e_enabled_blue" />
+
+        <ImageButton
+            android:id="@+id/buttonF"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/button_f_enabled_blue" />
+
+        <ImageButton
+            android:id="@+id/buttonG"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/button_g_enabled_blue" />
+
+        <ImageButton
+            android:id="@+id/buttonH"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/button_h_enabled_blue" />
+
+        <ImageButton
+            android:id="@+id/buttonI"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/button_i_enabled_blue" />
+
+    </GridLayout>
+
+    <GridLayout
+        android:id="@+id/keyboardrow3h"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:columnCount="4"
+        android:paddingLeft="8dp"
+        android:paddingTop="4dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="4dp"
+        android:rowCount="1"
+        app:layout_constraintStart_toStartOf="@id/vline2h"
+        app:layout_constraintEnd_toEndOf="@id/vline3h"
+        app:layout_constraintTop_toTopOf="@id/hline4h"
+        app:layout_constraintBottom_toTopOf="@id/hline5h" >
+
+
+        <ImageButton
+            android:id="@+id/buttonJ"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/button_j_enabled_blue" />
+
+        <ImageButton
+            android:id="@+id/buttonK"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/button_k_enabled_blue" />
+
+        <ImageButton
+            android:id="@+id/buttonL"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/button_l_enabled_blue" />
+
+        <ImageButton
+            android:id="@+id/buttonM"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/button_m_enabled_blue" />
+
+    </GridLayout>
+
+    <GridLayout
+        android:id="@+id/keyboardrow4h"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:columnCount="5"
+        android:paddingLeft="8dp"
+        android:paddingTop="4dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="4dp"
+        android:rowCount="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/vline1h"
+        app:layout_constraintTop_toTopOf="@id/hline5h"
+        app:layout_constraintBottom_toTopOf="@id/hline6h" >
+
+        <ImageButton
+            android:id="@+id/buttonN"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/button_n_enabled_blue" />
+
+        <ImageButton
+            android:id="@+id/buttonO"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/button_o_enabled_blue" />
+
+        <ImageButton
+            android:id="@+id/buttonP"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/button_p_enabled_blue" />
+
+        <ImageButton
+            android:id="@+id/buttonQ"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/button_q_enabled_blue" />
+
+        <ImageButton
+            android:id="@+id/buttonR"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/button_r_enabled_blue" />
+
+    </GridLayout>
+
+    <GridLayout
+        android:id="@+id/keyboardrow5h"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:columnCount="4"
+        android:paddingLeft="8dp"
+        android:paddingTop="4dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="8dp"
+        android:rowCount="1"
+        app:layout_constraintStart_toStartOf="@id/vline2h"
+        app:layout_constraintEnd_toEndOf="@id/vline3h"
+        app:layout_constraintTop_toTopOf="@id/hline6h"
+        app:layout_constraintBottom_toBottomOf="@id/hline7h" >
+
+
+
+        <ImageButton
+            android:id="@+id/buttonS"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/button_s_enabled_blue" />
+
+        <ImageButton
+            android:id="@+id/buttonT"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:contentDescription="what"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/button_t_enabled_blue" />
+
+        <ImageButton
+            android:id="@+id/buttonU"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/button_u_enabled_blue" />
+
+        <ImageButton
+            android:id="@+id/buttonV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/button_v_enabled_blue" />
+
+    </GridLayout>
+
+    <GridLayout
+        android:id="@+id/keyboardrow6h"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:columnCount="4"
+        android:paddingLeft="8dp"
+        android:paddingTop="4dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="8dp"
+        android:rowCount="1"
+        app:layout_constraintStart_toStartOf="@id/vline2h"
+        app:layout_constraintEnd_toEndOf="@id/vline3h"
+        app:layout_constraintTop_toTopOf="@id/hline7h"
+        app:layout_constraintBottom_toBottomOf="@id/hline1h" >
+
+        <ImageButton
+            android:id="@+id/buttonW"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/button_w_enabled_blue" />
+
+        <ImageButton
+            android:id="@+id/buttonX"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/button_x_enabled_blue" />
+
+        <ImageButton
+            android:id="@+id/buttonY"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/button_y_enabled_blue" />
+
+        <ImageButton
+            android:id="@+id/buttonZ"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/button_z_enabled_blue" />
+
+    </GridLayout>
+
+    <View
+        android:id="@+id/box3h"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@android:color/white"
+        app:layout_constraintStart_toStartOf="@id/vline1h"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/hline1h"
+        />
+
+    <Button
+        android:id="@+id/newgame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Game"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@id/vline5h"
+        app:layout_constraintTop_toTopOf="@id/hline8h"
+        />
+
+    <ImageView
+        android:id="@+id/hang"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:srcCompat="@drawable/hang_empty3"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="@id/vline1h"
+        app:layout_constraintEnd_toEndOf="@id/vline5h"
+        app:layout_constraintTop_toTopOf="@id/hline8h"
+        app:layout_constraintBottom_toBottomOf="@id/hline9h"
+        />
+
+
+    <View
+        android:id="@+id/box2h"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@android:color/holo_green_light"
+        app:layout_constraintStart_toStartOf="@id/vline1h"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/hline1h"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <GridLayout
+        android:id="@+id/letterrowh"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:columnCount="17"
+        android:paddingLeft="8dp"
+        android:paddingTop="8dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="8dp"
+        android:rowCount="1"
+        app:layout_constraintStart_toStartOf="@id/vline4h"
+        app:layout_constraintEnd_toEndOf="@id/vline5h"
+        app:layout_constraintTop_toTopOf="@id/hline1h"
+        app:layout_constraintBottom_toBottomOf="parent" >
+
+        <ImageView
+            android:id="@+id/letter1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            app:srcCompat="@drawable/bar4"
+            android:visibility="visible"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="0.5"
+            />
+
+        <ImageView
+            android:id="@+id/letter2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            app:srcCompat="@drawable/bar4"
+            android:visibility="visible"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="0.5"
+            />
+
+        <ImageView
+            android:id="@+id/letter3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            app:srcCompat="@drawable/bar4"
+            android:visibility="visible"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="0.5"
+            />
+
+        <ImageView
+            android:id="@+id/letter4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            app:srcCompat="@drawable/bar4"
+            android:visibility="visible"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="0.5"
+            />
+
+
+        <ImageView
+            android:id="@+id/letter5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            app:srcCompat="@drawable/bar4"
+            android:visibility="visible"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="0.5"
+            />
+
+        <ImageView
+            android:id="@+id/letter6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            app:srcCompat="@drawable/bar4"
+            android:visibility="visible"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="0.5"
+            />
+
+        <ImageView
+            android:id="@+id/letter7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            app:srcCompat="@drawable/bar4"
+            android:visibility="visible"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="0.5"
+            />
+
+        <ImageView
+            android:id="@+id/letter8"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            app:srcCompat="@drawable/bar4"
+            android:visibility="visible"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="0.5"
+            />
+
+        <ImageView
+            android:id="@+id/letter9"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            app:srcCompat="@drawable/bar4"
+            android:visibility="visible"/>
+
+    </GridLayout>
+
+    <View
+        android:id="@+id/box4h"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@android:color/holo_red_light"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/vline1h"
+        app:layout_constraintTop_toTopOf="@id/hline1h"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:gravity="top|center_horizontal"
+        app:layout_constraintStart_toStartOf="@id/vline2h"
+        app:layout_constraintEnd_toEndOf="@id/vline3h"
+        app:layout_constraintTop_toTopOf="@id/hline10h"
+        app:layout_constraintBottom_toBottomOf="@id/hline11h"
+        >
+
+        <Button
+            android:id="@+id/buttonhint"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="Hint"
+            android:textSize="16sp"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/hint"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Hint: Fruit"
+            android:textColor="@color/black"
+            android:gravity="center"
+            app:autoSizeTextType="uniform"
+            app:autoSizeMinTextSize="24sp"
+            app:autoSizeMaxTextSize="40sp"
+            android:visibility="invisible"
+            tools:ignore="MissingConstraints" />
+
+        </LinearLayout>
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.example.jonathanthomashangman2
 
 import android.util.Log
+import android.view.View
 import android.widget.ImageView
 import androidx.lifecycle.ViewModel
 import java.util.LinkedList
@@ -48,13 +49,13 @@ class HangmanViewModel : ViewModel() {
         Button(R.id.buttonW, R.drawable.button_w_enabled_blue, true),
         Button(R.id.buttonX, R.drawable.button_x_enabled_blue, true),
         Button(R.id.buttonY, R.drawable.button_y_enabled_blue, true),
-        Button(R.id.buttonZ, R.drawable.button_z_enabled_blue, true)
+        Button(R.id.buttonZ, R.drawable.button_z_enabled_blue, true),
     )
 
     private val wordBank = listOf(
-        Word(R.string.word1, listOf('A', 'P', 'P', 'L', 'E'),5),
-        Word(R.string.word2, listOf('B', 'A', 'C', 'K', 'P','A','C','K'),8),
-        Word(R.string.word3, listOf('C', 'A', 'T'),3))
+        Word(R.string.word1, listOf('A', 'P', 'P', 'L', 'E'), listOf(0, 15, 15, 11, 4),5, "Fruit"),
+        Word(R.string.word2, listOf('B', 'A', 'C', 'K', 'P','A','C','K'), listOf(1, 0, 2, 10, 15, 0, 2, 10),8, "School Supply"),
+        Word(R.string.word3, listOf('C', 'A', 'T'), listOf(2, 0, 19),3, "Animal"))
 
     private var instructions = R.string.instr2
 
@@ -63,6 +64,16 @@ class HangmanViewModel : ViewModel() {
     private var nextHang = 0
 
     private var rem = wordBank[currentWord].length
+
+    private var hint = wordBank[currentWord].hint
+
+    private var hintVis = View.INVISIBLE
+
+    private var buttonHint = true
+
+    private var hintIndex = 0
+
+    private var numDisbled = 0
 
     val getInstr: Int
         get() = instructions
@@ -163,6 +174,47 @@ class HangmanViewModel : ViewModel() {
             Button(R.id.buttonY, R.drawable.button_y_enabled_blue, true),
             Button(R.id.buttonZ, R.drawable.button_z_enabled_blue, true)
         )
+        buttonHint = true
+        numDisbled = 0
+    }
+
+    val getHint: String
+        get() = hint
+
+    fun setHint() {
+        hint = wordBank[currentWord].hint
+    }
+
+    val getHintVis: Int
+        get() = hintVis
+
+    fun setHintVis(i: Int) {
+        hintVis = i
+    }
+
+    val getButtonHint: Boolean
+        get() = buttonHint
+
+    fun setButtonHint(b: Boolean) {
+        buttonHint = b
+    }
+
+    val getHintIndex: Int
+        get() = hintIndex
+
+    fun setHintIndex(i: Int) {
+        hintIndex = i
+    }
+
+    val getNumDisabled: Int
+        get() = numDisbled
+
+    fun incrNumDisabled() {
+        numDisbled += 1
+    }
+
+    fun resetNumDisabled() {
+        numDisbled = 0
     }
 
 }
