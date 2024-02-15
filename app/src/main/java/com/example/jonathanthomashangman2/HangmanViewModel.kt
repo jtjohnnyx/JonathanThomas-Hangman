@@ -53,9 +53,17 @@ class HangmanViewModel : ViewModel() {
     )
 
     private val wordBank = listOf(
-        Word(R.string.word1, listOf('A', 'P', 'P', 'L', 'E'), listOf(0, 15, 15, 11, 4),5, "Fruit"),
+        Word(R.string.word1, "APPLE".toList(), listOf(0, 15, 15, 11, 4),5, "Fruit"),
         Word(R.string.word2, listOf('B', 'A', 'C', 'K', 'P','A','C','K'), listOf(1, 0, 2, 10, 15, 0, 2, 10),8, "School Supply"),
-        Word(R.string.word3, listOf('C', 'A', 'T'), listOf(2, 0, 19),3, "Animal"))
+        Word(R.string.word3, listOf('C', 'A', 'T'), listOf(2, 0, 19),3, "Animal"),
+        Word(R.string.word3, listOf('S','T','A','R','B','U','C','K','S'), listOf(18,19,0,17,1,20,2,10,18),9, "Restaurant/Detritus"),
+        Word(R.string.word3, listOf('G','R','A','V','E','L'), listOf(6, 17, 0,21,4,11),6, "Building Material"),
+        Word(R.string.word3, listOf('B','U','R','G','E','R'), listOf(1,20,17,6,4,17),6, "Food"),
+        Word(R.string.word3, listOf('F','L','K','S','G','P','Z','X','B'), listOf(5,11,10,18,6,15,25,23,1),9, "Gibberish"),
+        Word(R.string.word3, "RONCZIK".toList(), listOf(17,14,13,2,25,8,10),7, "Educator"),
+        Word(R.string.word3, listOf('A','R','M','A','D','I','L','L','O'), listOf(0,17,12,0,3,8,11,11,14),9, "Animal"),
+        Word(R.string.word3, "IO".toList(), listOf(8,14),2, "Input/Output")
+    )
 
     private var instructions = R.string.instr2
 
