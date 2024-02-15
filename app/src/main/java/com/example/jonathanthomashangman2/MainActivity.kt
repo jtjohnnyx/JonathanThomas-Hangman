@@ -1060,7 +1060,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.buttonhint?.setOnClickListener() {
-            Log.d("remainder", hangmanViewModel.getRem.toString())
+            //Log.d("remainder", hangmanViewModel.getRem.toString())
             Log.d("hintindex", hangmanViewModel.getHintIndex.toString())
             if (hangmanViewModel.getHintIndex == 0) {
                 binding.hint?.visibility = View.VISIBLE
@@ -1096,6 +1096,7 @@ class MainActivity : AppCompatActivity() {
                     hangmanViewModel.setButtonHint(false)
                 }
             }
+            Log.d("remainder", hangmanViewModel.getRem.toString())
         }
 
     }
@@ -1207,19 +1208,19 @@ class MainActivity : AppCompatActivity() {
 
     private fun showVowels() {
 
-        if(0 in wordBank[hangmanViewModel.getCurrentWord].mip) {
+        if(0 in wordBank[hangmanViewModel.getCurrentWord].mip && hangmanViewModel.getButton(0).enabled) {
             aListener.onClick(null)
         }
-        if(4 in wordBank[hangmanViewModel.getCurrentWord].mip) {
+        if(4 in wordBank[hangmanViewModel.getCurrentWord].mip && hangmanViewModel.getButton(4).enabled) {
             eListener.onClick(null)
         }
-        if(8 in wordBank[hangmanViewModel.getCurrentWord].mip) {
+        if(8 in wordBank[hangmanViewModel.getCurrentWord].mip && hangmanViewModel.getButton(8).enabled) {
             iListener.onClick(null)
         }
-        if(14 in wordBank[hangmanViewModel.getCurrentWord].mip) {
+        if(14 in wordBank[hangmanViewModel.getCurrentWord].mip && hangmanViewModel.getButton(14).enabled) {
             oListener.onClick(null)
         }
-        if(20 in wordBank[hangmanViewModel.getCurrentWord].mip) {
+        if(20 in wordBank[hangmanViewModel.getCurrentWord].mip && hangmanViewModel.getButton(20).enabled) {
             uListener.onClick(null)
         }
     }
